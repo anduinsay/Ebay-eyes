@@ -6,7 +6,7 @@ from config import key
 #condition = ("3000")
 minPrice =("0")
 maxPrice =("100000")
-path = "/home/anduin/PycharmProjects/WisePrice/PhoneNew/"
+path = "/home/anduin/PycharmProjects/WisePrice/Macbook/"
 def Get_data(searchTerm,length,condition,cID,opt='2'):
 
     ##opt == option, provide the option to find completed items or items still in list
@@ -17,6 +17,11 @@ def Get_data(searchTerm,length,condition,cID,opt='2'):
         operation = "findCompletedItems"
     else:
         print("You did not select a valid operation")
+
+    if condition == '1000':
+        d = 'new'
+    else:
+        d = 'used'
 
     for i in range(length):
         active_url = ("http://svcs.ebay.com/services/search/FindingService/v1\
@@ -52,8 +57,8 @@ def Get_data(searchTerm,length,condition,cID,opt='2'):
             return int(totalnum)
             break
 
-        with open(path + searchTerm+' set'+str(i+1)+'.json', 'w') as json_file:
-            print(path + searchTerm+' set'+str(i+1)+'.json')
+        with open(path + searchTerm+d+' set'+str(i+1)+'.json', 'w') as json_file:
+           # print(path + searchTerm++' set'+str(i+1)+'.json')
             json.dump(raw, json_file)
 
         if int(totalnum) <= 100 * (i + 1):
@@ -75,7 +80,7 @@ def Get_data(searchTerm,length,condition,cID,opt='2'):
 #Get_data(st,1,condition= '3000',cID= 9355)
 
 
-from test2 import namePhone
+#from test2 import namePhone
 #for phone in namePhone:
   #  st = (phone)
    # Get_data(st,length= 100,cID=9355,condition = '1000')
@@ -93,6 +98,8 @@ from test2 import namePhone
 
 
 #Get_data('Iphone',1,cID = 9355, condition = '3000')
+
+#111422
 
 
 

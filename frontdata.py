@@ -20,15 +20,8 @@ def UserInput(iname):
 
 def layout(input):
     df = UserInput(input)
-    df = df[df.price <= 3 * (df.price.mean())]
-    df = df[df.price >= 0.3 * (df.price.mean())]
-
     dfnew = df[df['itemcondition'] == 'new']
-    dfused = df[df['itemcondition'] == 'old']
-
-    dfnew = dfnew.groupby('time').agg({'price': np.mean}).reset_index()
-    dfused = dfnew.groupby('time').agg({'price': np.mean}).reset_index()
-    return dfnew,dfused
+    return len(dfnew),len(df)- len(dfnew)
 
 def preprocess(names):
     df = UserInput(names)
@@ -36,25 +29,25 @@ def preprocess(names):
     df = df[df.price >= 0.3 * (df.price.mean())]
 
     dfnew = df[df['itemcondition'] == 'new']
-    dfold = df[df['itemcondition'] == 'old']
+    dfold = df[(df['itemcondition'] =='old') | (df['itemcondition'] =='used')]
     dfnew = dfnew.groupby('time').agg({'price': np.mean}).reset_index()
-    dfold = dfnew.groupby('time').agg({'price': np.mean}).reset_index()
+    dfold = dfold.groupby('time').agg({'price': np.mean}).reset_index()
     trace_high = go.Scatter(
         x=dfnew.time,
         y=dfnew.price,
-        name=names + "  brand new",
+        name=names + " brand new",
         line=dict(color='#17BECF'),
         opacity=0.8)
     trace_low = go.Scatter(
         x=dfold.time,
         y=dfold.price,
-        name=names + " Used",
+        name=names + " used",
         line=dict(color='#7F7F7F'),
         opacity=0.8)
 
     data = [trace_high, trace_low]
     layout = dict(
-        title='Price Trend',
+        title='Price Historical trend',
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([dict(count=1, label='1 day', step='day', stepmode='backward'),
