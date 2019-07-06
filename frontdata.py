@@ -1,4 +1,4 @@
-##code to extract the data from database
+##code to extract the data from database and move to front end
 
 from AWSDB import engine
 import pandas as pd
