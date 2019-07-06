@@ -10,7 +10,7 @@ A tool to help customers buy better at eBay.
 ## Intro
 
 Find items at eBay is easy, just search:
-<img src="./img/search.jpg" width="800px"/>
+<img src="./img/ebaypic.jpg" width="800px"/>
 
 But what would you get are only
 endless pages and results.
@@ -21,7 +21,9 @@ Well, if you have these questions before, this tool is going to help you solve t
  
 ## Solution  
 Here is how it works:
-<img src="./img/plot.jpg" width="800px"/>
+<img src="./img/work.jpg" width="800px"/>
+<img src="./img/work2.jpg" width="800px"/>
+<img src="./img/work3.jpg" width="800px"/>
 
 whenever you search something,
 It provides the following information based on item condition(used or new):
@@ -37,7 +39,7 @@ Data source are provided by calling eBay API
 
 
 ## Architecture
-<img src="./img/architecture.png" width="800px"/>
+<img src="./img/arch.png" width="800px"/>
 
 - Call ebay API to request the historical and transaction data from ebay, the data is stored at S3 bucket.
 - Cleansing the data to extract most important information- price, transaction date, category id,etc.
