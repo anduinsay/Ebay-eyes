@@ -1,15 +1,20 @@
 # Ebay-eyes 
-# Buy better 
 
-For gamers, by gamers. Find hottest games in the past. [Link](https://docs.google.com/presentation/d/1bKBOQ-OUb8NDQauxHERG-QKo1LjgQbeqVj3Tk6CKYfc/edit#slide=id.p) to presentation.
+<img src="./img/e-eyes.png" width="800px"/>
 
+
+A tool to help customers buy better at eBay. 
 
 <hr/>
 
-## Introduction
+## Why
+
+ 
+
+
 Developing new games are becoming more and more expensive.
 
-Remaster popular games from the past can help reduce the development cost and satisfy gamers wishes.
+Remas popular games from the past can help reduce the development cost and satisfy gamers wishes.
 
 <img src="./img/reddit.png" width="700px"/>
 
