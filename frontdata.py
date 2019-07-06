@@ -9,12 +9,11 @@ import plotly.graph_objs as go
 
 #search by word, get data from db
 def UserInput(iname):
-    iname = '%%'+ iname + '%%'
+    iname = '%%'+ iname + ' %%'
     item_sql = 'select itemname,price,time,totalnum,transaction.condition as itemcondition from item right join transaction on item.itemid = transaction.itemid' \
                ' where itemname like '+ '"' +iname +'";'
     print(item_sql)
     data = pd.read_sql(item_sql, engine)
-    print(data)
     return data
 
 

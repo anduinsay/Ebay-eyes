@@ -25,8 +25,8 @@ app.layout = html.Div([
     html.Button(id='submit-button', n_clicks=0, children='Submit'),
     html.Div(id='output-state'),
     dcc.Graph(id='output-graph'),
-    dcc.Graph(id = 'dis-graph')
-
+    dcc.Graph(id = 'dis-graph'),
+    dcc.Graph(id= 'pie-graph')
 ])
 
 
@@ -57,12 +57,6 @@ def display_forecast_data(click,input1):
      [State('input-state', 'value')])
 
 #figure
-
-
-
-
-
-
 def display_forecast_data(click,input1):
      if int(click):
          df2 = UserInput(input1)
@@ -70,14 +64,79 @@ def display_forecast_data(click,input1):
          old = df2[df2['itemcondition'] != 'new']
 
          xnew = new.price.values
-         print(xnew)
+         #print(xnew)
+         #np.mean(xnew)
          xold = old.price.values
-         print(xold)
+         #print(xold)
          hist_data = [xnew,xold]
-         group_labels = ['new','used']
+         group_labels = ['new item with avg price '+ str(int(np.mean(xnew))),'used item with avg price '+ str(int(np.mean(xold)))]
 
-         results = ff.create_distplot(hist_data, group_labels)
+         results = ff.create_distplot(hist_data, group_labels,show_hist=True)
      return results
+
+@app.callback(
+     Output('pie-graph', 'figure'),
+     [Input('submit-button', 'n_clicks')],
+     [State('input-state', 'value')])
+
+def display_forecast_data(click,input1):
+     if int(click):
+         df3 = UserInput(input1)
+         new = df3[df3['itemcondition'] == 'new']
+         old = df3[df3['itemcondition'] != 'new']
+         nlabels = new.itemname.value_counts().index.values #nlabels = new labels
+         nvalues = new.itemname.value_counts().values #nvalues = new values
+         olabels = old.itemname.value_counts().index.values  # olabels = used items labels
+         ovalues = old.itemname.value_counts().values  # ovalues = used items values
+
+         fig3 = {
+             "data": [
+                 {
+                     "values": nvalues,
+                     "labels": nlabels,
+                     "domain": {"column": 0},
+                     "name": "New "+input1,
+                     "hoverinfo": "label+percent+name",
+                     "hole": .4,
+                     "type": "pie"
+                 },
+                 {
+                     "values": ovalues,
+                     "labels": olabels,
+                     "text": ["new"],
+                     "textposition": "inside",
+                     "domain": {"column": 1},
+                     "name": "old " +input1,
+                     "hoverinfo": "label+percent+name",
+                     "hole": .4,
+                     "type": "pie"
+                 }],
+             "layout": {
+                 "title": "Categorys of your search item",
+                 "grid": {"rows": 1, "columns": 2},
+                 "annotations": [
+                     {
+                         "font": {
+                             "size": 20
+                         },
+                         "showarrow": False,
+                         "text": "New",
+                         "x": 0.20,
+                         "y": 0.5
+                     },
+                     {
+                         "font": {
+                             "size": 20
+                         },
+                         "showarrow": False,
+                         "text": "Used",
+                         "x": 0.8,
+                         "y": 0.5
+                     }
+                 ]
+             }
+         }
+     return fig3
 
 
 if __name__ == '__main__':
