@@ -60,14 +60,15 @@ def display_forecast_data(click,input1):
 def display_forecast_data(click,input1):
      if int(click):
          df2 = UserInput(input1)
+         df2 = df2[df2.price <= 3 * (df2.price.mean())]
+         df2 = df2[df2.price >= 0.3 * (df2.price.mean())]
          new = df2[df2['itemcondition'] == 'new']
          old = df2[df2['itemcondition'] != 'new']
 
          xnew = new.price.values
-         #print(xnew)
-         #np.mean(xnew)
+
          xold = old.price.values
-         #print(xold)
+
          hist_data = [xnew,xold]
          group_labels = ['new item with avg price '+ str(int(np.mean(xnew))),'used item with avg price '+ str(int(np.mean(xold)))]
 
@@ -95,7 +96,7 @@ def display_forecast_data(click,input1):
                      "values": nvalues,
                      "labels": nlabels,
                      "domain": {"column": 0},
-                     "name": "New "+input1,
+                     "name": input1,
                      "hoverinfo": "label+percent+name",
                      "hole": .4,
                      "type": "pie"
@@ -103,10 +104,8 @@ def display_forecast_data(click,input1):
                  {
                      "values": ovalues,
                      "labels": olabels,
-                     "text": ["new"],
-                     "textposition": "inside",
                      "domain": {"column": 1},
-                     "name": "old " +input1,
+                     "name": input1,
                      "hoverinfo": "label+percent+name",
                      "hole": .4,
                      "type": "pie"

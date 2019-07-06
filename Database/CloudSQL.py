@@ -7,7 +7,7 @@ from dataprocess import Process
 from pathlib import Path ##check if file exists
 
 
-### update the item db, monthly update recommended
+
 
 def update_itemdb(itemfile,CategoryID):
     ##input a file, spcific the category id of the
@@ -17,10 +17,11 @@ def update_itemdb(itemfile,CategoryID):
     newdata['CategoryId'] = CategoryID
     newdata.to_sql('item',con = engine,schema='ebay',if_exists = "append",index = False)
 
-## update the transaction db, daily update required, for special item, update every 1 hour
+
 def update_transaction():
 
     updateitem = pd.read_sql('select itemname,categoryID from item',engine)
+
     itemname = updateitem.itemname.values
     category = updateitem.categoryID.values
 
@@ -41,3 +42,8 @@ def update_transaction():
 
 
 
+if __name__ == "__main__":
+
+
+
+    update_transaction()
