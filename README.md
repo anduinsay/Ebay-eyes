@@ -1,6 +1,6 @@
 # Ebay-eyes 
 
-<img src="./img/e-eyes.png" width="800px"/>
+<img src="./img/e-eyes.jpg" width="800px"/>
 
 
 A tool to help customers buy better at eBay. 
