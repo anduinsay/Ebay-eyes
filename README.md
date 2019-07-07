@@ -22,7 +22,9 @@ Well, if you have these questions before, this tool is going to help you solve t
 ## Solution  
 Here is how it works:
 <img src="./img/work.jpg" width="800px"/>
+
 <img src="./img/work2.jpg" width="800px"/>
+
 <img src="./img/work3.jpg" width="800px"/>
 
 whenever you search something,
